@@ -91,33 +91,44 @@ namespace SoftQualv1
 
         public void getTravelData(int OriginID, int DestinationID, bool FLTorLTL)
         {
+
             //figure out if we need to travel east or west
             GraphNode current = nodes.Find(x => x.CityID == OriginID);
             GraphNode nextCity;
 
 
 
+            TripDataPassBack tripDataPassBack = new TripDataPassBack();
+
             if (OriginID > DestinationID)
             {
                 //going west
                 nextCity = (GraphNode)current.West;
 
-                TripDataPassBack tripDataPassBack = new TripDataPassBack();
-                tripDataPassBack.CityA = current
-
+                tripDataPassBack.KM = current.WestKM;
+                tripDataPassBack.hours = current.WestHour;
 
             }
             else
             {
                 //going east
+                nextCity = (GraphNode)current.East;
+
+                tripDataPassBack.KM = current.EastKM;
+                tripDataPassBack.hours = current.EastHour;
             }
 
+            tripDataPassBack.CityA = current.CityID;
+            tripDataPassBack.CityB = nextCity.CityID;
 
 
 
 
 
-           
+
+
+
+
         }
 
 
